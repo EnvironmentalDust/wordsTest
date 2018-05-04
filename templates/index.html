@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            
+            
+            $("button").click(function(){
+                why = document.getElementById("word").value;
+                $.get("getWords", {a:why}).done(function(data){
+                    console.log(data);
+                    // data = JSON.parse(data);
+                    dataObj = JSON.parse(data);
+                    var words = "";
+                    for (var index = 0; index < dataObj.length; index++) {
+                        words = words + dataObj[index][index] + "\n";
+                    }
+                    document.getElementById("count").innerHTML = "Общее число записей: " + index;
+                    document.getElementById("words").innerHTML = words.substr(0, words.length - 2);
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <div>
+            <textarea name="" id="word" cols="30" rows="10"></textarea>
+        </div>
+        <div>
+            <p id="count">Общее число записей: </p>
+            <textarea name="" id="words" cols="30" rows="10"></textarea>
+        </div>
+    </div>
+    <button>Слова</button>
+</body>
+</html>
